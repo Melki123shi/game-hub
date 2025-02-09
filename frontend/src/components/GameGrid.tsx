@@ -1,7 +1,7 @@
 import { Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import axiosClient from "../services/api-client";
-// import axios from "axios";
+// import axiosClient from "../services/api-client";
+import axios from "axios";
 
 
 const GameGrid = () => {
@@ -16,7 +16,7 @@ const GameGrid = () => {
   }
 
   useEffect(() => {
-    axiosClient.get<GameGridResponse>("/games").then(
+    axios.get<GameGridResponse>("http://localhost:3000/api/games").then(
       (response) => {
         setGames(response.data.results);
         console.log(response)
