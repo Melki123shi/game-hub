@@ -1,6 +1,7 @@
 import { Grid, GridItem, Show, useBreakpointValue } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 
+
 function App() {
   const isLargeScreen = useBreakpointValue({ base: false, lg: true });
   return (
