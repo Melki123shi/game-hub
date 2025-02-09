@@ -4,7 +4,7 @@ import ColorModeButton from "./ColorModeButton";
 
 const NavBar = () => {
   return (
-    <HStack justify="space-between">
+    <HStack paddingX={4} justify="space-between">
       <Image
         src={logo}
         blockSize={12}
