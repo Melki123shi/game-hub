@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axiosClient from "../services/api-client";
 
-interface Game {
+export interface Game {
   id: number;
   name: string;
   released: string;
