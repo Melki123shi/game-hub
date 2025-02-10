@@ -1,13 +1,16 @@
-import { Text } from "@chakra-ui/react";
+import { Text, VStack, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-// import axiosClient from "../services/api-client";
-import axios from "axios";
-
+import axiosClient from "../services/api-client";
 
 const GameGrid = () => {
   interface Game {
     id: number;
     name: string;
+    released: string;
+    background_image: string;
+    rating: number;
+    platforms: string[];
+    genres: string[];
   }
 
   interface GameGridResponse {
@@ -16,37 +19,15 @@ const GameGrid = () => {
   }
 
   useEffect(() => {
-    axios.get<GameGridResponse>("http://localhost:3000/api/games").then(
+    axiosClient.get<GameGridResponse>("/games").then(
       (response) => {
         setGames(response.data.results);
-        console.log(response)
+        console.log(response.data);
       },
       (error) => {
         setError(error.message);
       }
     );
-    // const fetchGame = async() => {
-    //   const options = {
-    //     method: "GET",
-    //     url: "https://rawg-video-games-database.p.rapidapi.com/games",
-    //     headers: {
-    //       "x-rapidapi-key": "e34eb4e3b2msh7049b810c7b3b31p15b583jsnd0b3a737a038",
-    //       "key": "e34eb4e3b2msh7049b810c7b3b31p15b583jsnd0b3a737a038",
-    //       "x-rapidapi-host": "rawg-video-games-database.p.rapidapi.com",
-    //     },
-    //   };
-  
-    //   try {
-    //     const response = await axios.request(options);
-    //     console.log(response.data);
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // }
-
-    // fetchGame();
-
-    
   }, []);
 
   const [games, setGames] = useState<Game[]>([]);
@@ -54,10 +35,18 @@ const GameGrid = () => {
 
   return (
     <>
-      {error ?? <Text>{error}</Text>}
-      {games.map((game) => (
-        <Text key={game.id}>{game.name}</Text>
-      ))}
+      {error && <Text>{error}</Text>}
+      <ul>
+        {games &&
+          games.map((game) => (
+            <li>
+              <VStack>
+                <Image src={game.background_image} boxSize={211} ></Image>
+                <Text key={game.id}>{game.name}</Text>
+              </VStack>
+            </li>
+          ))}
+      </ul>
     </>
   );
 };
