@@ -9,6 +9,7 @@ export interface Game {
   rating: number;
   platforms: string[];
   genres: string[];
+  criticScore: number;
 }
 
 export interface GameGridResponse {
