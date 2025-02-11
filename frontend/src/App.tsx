@@ -14,7 +14,7 @@ function App() {
         `,
         lg: `
           "header header"
-          "main aside"
+          "aside main"
         `,
       }}
     >
