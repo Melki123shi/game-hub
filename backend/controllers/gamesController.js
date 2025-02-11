@@ -1,4 +1,4 @@
-import  Game  from '../model/game.js';
+import  Game  from '../models/game.js';
 
 const getAllgames = async (req, res) => {
     const games = await Game.find();
