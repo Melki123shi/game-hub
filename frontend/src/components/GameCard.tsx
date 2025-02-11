@@ -5,7 +5,7 @@ import PlatformIconList from "./PlatformIconList";
 
 const GameCard = ({ game }: { game: Game }) => {
   return (
-    <Card.Root borderRadius={13} overflow="hidden">
+    <Card.Root>
       <Image src={game.background_image} height={233}></Image>
       <Card.Body gap={2}>
         <Card.Title fontSize={"2xl"}>{game.name}</Card.Title>
