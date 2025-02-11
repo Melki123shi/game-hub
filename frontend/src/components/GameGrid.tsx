@@ -10,7 +10,7 @@ const GameGrid = () => {
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
         gap={"39px"}
-        margin={9}
+        margin={{ base: 4, sm: 24, md: 12, lg: 23, xl: 24 }}
       >
         {games && games.map((game) => <GameCard key={game.id} game={game} />)}
       </SimpleGrid>
