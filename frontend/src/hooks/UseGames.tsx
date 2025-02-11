@@ -19,23 +19,26 @@ export interface GameGridResponse {
 export const useGames = () => {
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
-
+    setLoading(true);
     axiosClient.get<GameGridResponse>("/games").then(
       (response) => {
         setGames(response.data.results);
         console.log(response.data);
+        setLoading(false);
       },
       (error) => {
         if (error instanceof AbortController) return;
         setError(error.message);
+        setLoading(false);
       }
     );
 
     return () => controller.abort();
   }, []);
 
-  return { games, error };
+  return { games, error, loading };
 };
