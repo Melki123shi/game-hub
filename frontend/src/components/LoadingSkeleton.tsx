@@ -3,7 +3,7 @@ import { Skeleton, SkeletonText } from "@/components/ui/skeleton";
 
 const LoadingSkeleton = () => {
   return (
-    <Card.Root width={300} height={370}>
+    <Card.Root width={300}>
       <Skeleton height={233} />
       <Card.Body gap={2}>
         <SkeletonText />

@@ -18,6 +18,7 @@ function App() {
           "aside main"
         `,
       }}
+       templateColumns={{ base: "1fr", lg: "244px 3fr" }}
     >
       <GridItem area="header">
         <NavBar />
@@ -27,7 +28,7 @@ function App() {
       </GridItem>
       <Show when={isLargeScreen}>
 
-      <GridItem area="aside">
+      <GridItem area="aside" paddingLeft={14}>
         <GenreList />
       </GridItem>
       </Show>
