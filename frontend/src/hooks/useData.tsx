@@ -8,26 +8,26 @@ export interface GridResponse<T> {
 export const useData = <T,>(endpoint: string) => {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
-    setLoading(true);
+    setisLoading(true);
     axiosClient.get<GridResponse<T>>(endpoint).then(
       (response) => {
         setData(response.data.results);
         console.log(response.data);
-        setLoading(false);
+        setisLoading(false);
       },
       (error) => {
         if (error instanceof AbortController) return;
         setError(error.message);
-        setLoading(false);
+        setisLoading(false);
       }
     );
 
     return () => controller.abort();
   }, []);
 
-  return { data, error, loading };
+  return { data, error, isLoading };
 };
