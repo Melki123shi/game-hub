@@ -12,17 +12,16 @@ const GenreList = () => {
     );
   if (error) return null;
   return (
-    <List.Root gap={4} marginTop={14} listStyleType="none">
+    <List.Root gap={4} marginTop={11} listStyleType="none">
       {data.map((genre) => (
         <ListItem key={genre.id}>
           <HStack gap={4}>
             <Image
               src={genre.image_background}
-              width={14}
-              height={14}
+              boxSize={12}
               borderRadius={4}
             />
-            <Text fontSize={"18px"}>{genre.name}</Text>
+            <Text fontSize={"lg"} fontWeight={'bold'} _hover={{color: "yellow.300", cursor:"pointer" }}>{genre.name}</Text>
           </HStack>
         </ListItem>
       ))}
