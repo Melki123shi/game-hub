@@ -1,7 +1,8 @@
 import { useData } from "./useData";
+import { Genre } from "./UseGenres";
 
 export interface Game {
-  id: number;
+  _id: string;
   name: string;
   released: string;
   background_image: string;
@@ -11,4 +12,4 @@ export interface Game {
   criticScore: number;
 }
 
-export const useGames = () => useData<Game>("/games");
+export const useGames = (selectedGenre: Genre | null) => useData<Game>("/games", {params : {genre : selectedGenre?.name}}, [selectedGenre?.name]);
