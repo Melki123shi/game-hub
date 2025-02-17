@@ -8,12 +8,19 @@ import {
   Spinner,
   Link,
 } from "@chakra-ui/react";
+import { useColorModeValue } from "./ui/color-mode";
 
 interface Props {
   onSelectGenre: (genre: Genre) => void;
+  selectedGenre: Genre | null;
 }
 
-const GenreList = ({ onSelectGenre }: Props) => {
+const GenreList = ({selectedGenre, onSelectGenre }: Props) => {
+
+  const hoverColor = useColorModeValue("yellow.500", "yellow.300");
+  const selectedColor = useColorModeValue("yellow.600", "yellow.400");
+  const textColor = useColorModeValue("black", "white");
+
   const { data, isLoading, error } = UseGenres();
 
   if (isLoading)
@@ -32,7 +39,9 @@ const GenreList = ({ onSelectGenre }: Props) => {
             <Link
               onClick={() => onSelectGenre(genre)}
               fontSize={"lg"}
-              _hover={{ color: "yellow.200", cursor: "pointer" }}
+              fontWeight={selectedGenre === genre ? "bold" : "normal"}
+              color={selectedGenre === genre ? selectedColor : textColor}
+              _hover={{ color: hoverColor, cursor: "pointer" }}
             >
               {genre.name}
             </Link>
