@@ -4,11 +4,15 @@ import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
 import { Genre } from "./hooks/UseGenres";
-
+import PlatformSelector from "./components/PlatformSelector";
+import { Platform } from "./hooks/UsePlatforms";
 
 function App() {
   const isLargeScreen = useBreakpointValue({ base: false, lg: true });
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(
+    null
+  );
 
   return (
     <Grid
@@ -22,21 +26,34 @@ function App() {
           "aside main"
         `,
       }}
-       templateColumns={{ base: "1fr", lg: "244px 3fr" }}
+      templateColumns={{ base: "1fr", lg: "244px 3fr" }}
     >
       <GridItem area="header">
         <NavBar />
       </GridItem>
-      <GridItem area="main">
-        <GameGrid selectedGenre={selectedGenre}/>
+      <GridItem
+        area="main"
+        marginX={{ base: 4, sm: 24, md: 12, lg: 23, xl: 24 }}
+      >
+        <PlatformSelector
+          selectedPlatform={selectedPlatform}
+          onSelectPlatform={(platform) => setSelectedPlatform(platform)}
+          unSelectPlatform={() => setSelectedPlatform(null)}
+        />
+        <GameGrid
+          selectedGenre={selectedGenre}
+          selectedPlatform={selectedPlatform}
+        />
       </GridItem>
       <Show when={isLargeScreen}>
-
-      <GridItem area="aside" paddingLeft={14}>
-        <GenreList onSelectGenre={(genre) => setSelectedGenre(genre)} selectedGenre={selectedGenre}/>
-      </GridItem>
+        <GridItem area="aside" paddingLeft={14}>
+          <GenreList
+            onSelectGenre={(genre) => setSelectedGenre(genre)}
+            selectedGenre={selectedGenre}
+          />
+        </GridItem>
       </Show>
-    </Grid> 
+    </Grid>
   );
 }
 

@@ -6,7 +6,7 @@ export interface GridResponse<T> {
   count: number;
   results: T[];
 }
-export const useData = <T,>(
+export const UseData = <T,>(
   endpoint: string,
   requestConfig?: AxiosRequestConfig,
   dependencies?: unknown[]
