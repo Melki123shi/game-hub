@@ -1,4 +1,10 @@
-import { Grid, GridItem, Show, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Grid,
+  GridItem,
+  HStack,
+  Show,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
@@ -6,6 +12,7 @@ import { useState } from "react";
 import { Genre } from "./hooks/UseGenres";
 import PlatformSelector from "./components/PlatformSelector";
 import { Platform } from "./hooks/UsePlatforms";
+import SortSelector from "./components/SortSelector";
 
 export interface GameQuery {
   genre: Genre | null;
@@ -37,19 +44,24 @@ function App() {
         area="main"
         marginX={{ base: 4, sm: 24, md: 12, lg: 23, xl: 24 }}
       >
-        <PlatformSelector
-          selectedPlatform={gameQuery.platform}
-          onSelectPlatform={(platform) => setGameQuery({...gameQuery, platform})}
-          unSelectPlatform={() => setGameQuery({...gameQuery, platform: null})}
-        />
-        <GameGrid
-          gameQuery={gameQuery}
-        />
+        <HStack gap={4} marginBottom={4}>
+          <PlatformSelector
+            selectedPlatform={gameQuery.platform}
+            onSelectPlatform={(platform) =>
+              setGameQuery({ ...gameQuery, platform })
+            }
+            unSelectPlatform={() =>
+              setGameQuery({ ...gameQuery, platform: null })
+            }
+          />
+          <SortSelector />
+        </HStack>
+        <GameGrid gameQuery={gameQuery} />
       </GridItem>
       <Show when={isLargeScreen}>
         <GridItem area="aside" paddingLeft={14}>
           <GenreList
-            onSelectGenre={(genre) => setGameQuery({...gameQuery, genre})}
+            onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
             selectedGenre={gameQuery.genre}
           />
         </GridItem>

@@ -4,9 +4,10 @@ import {
   MenuRoot,
   MenuTrigger,
 } from "@/components/ui/menu";
-import { Platform, UsePlatforms } from "@/hooks/UsePlatforms";
 import { Button, HStack, Text } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
+
+import { Platform, UsePlatforms } from "@/hooks/UsePlatforms";
 
 interface Props {
   selectedPlatform: Platform | null;
