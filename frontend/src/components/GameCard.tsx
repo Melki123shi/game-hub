@@ -8,11 +8,11 @@ const GameCard = ({ game }: { game: Game }) => {
     <Card.Root borderRadius={13} overflow="hidden"> 
       <Image src={game.background_image} height={233}></Image>
       <Card.Body gap={2}>
-        <Card.Title fontSize={"2xl"}>{game.name}</Card.Title>
         <HStack justify='space-between'>
           <PlatformIconList platforms={game.platforms} />
           <CriticScore score={game.criticScore} />
         </HStack>
+        <Card.Title fontSize={"2xl"}>{game.name}</Card.Title>
       </Card.Body>
     </Card.Root>
   );
