@@ -7,7 +7,20 @@ import {
 import { Button, HStack, Text } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 
-const SortSelector = () => {
+interface Props {
+  onSelect: (value: string) => void;
+  sortBy: string | null;
+}
+
+const SortSelector = ({ onSelect, sortBy }: Props) => {
+  const sortingOptions: { [key: string]: string } = {
+    "": "Relevance",
+    "-added": "Date Added",
+    name: "Name",
+    "-released": "Release Date",
+    "-criticScore": "Popularity",
+    "-rating": "Average Rating",
+  };
   return (
     <MenuRoot>
       <MenuTrigger asChild>
@@ -18,37 +31,24 @@ const SortSelector = () => {
           borderRadius={4}
         >
           <HStack justifyContent="space-between">
-            <Text fontSize={"lg"}>OrderBy: Relevance</Text>
+            <Text fontSize={"lg"}>
+              OrderBy: {sortBy ? sortingOptions[sortBy] : "Relevance"}
+            </Text>
             <BsChevronDown />
           </HStack>
         </Button>
       </MenuTrigger>
       <MenuContent>
-        {/* <MenuItem
-              value="none"
-              cursor={"pointer"}
-              onClick={() => unSelectPlatform()}
-            >
-              None
-            </MenuItem> */}
-        <MenuItem value="Relevance" cursor={"pointer"}>
-          Relevance
-        </MenuItem>
-        <MenuItem value="Date Added" cursor={"pointer"}>
-          Date Added
-        </MenuItem>
-        <MenuItem value="Name" cursor={"pointer"}>
-          Name
-        </MenuItem>
-        <MenuItem value="Release Date" cursor={"pointer"}>
-          Release Date
-        </MenuItem>
-        <MenuItem value="Popularity" cursor={"pointer"}>
-          Popularity
-        </MenuItem>
-        <MenuItem value="Average Rating" cursor={"pointer"}>
-          Average Rating
-        </MenuItem>
+        {Object.entries(sortingOptions).map(([key, option]) => (
+          <MenuItem
+            value={key}
+            cursor={"pointer"}
+            key={key}
+            onClick={() => onSelect(key)}
+          >
+            {option}
+          </MenuItem>
+        ))}
       </MenuContent>
     </MenuRoot>
   );

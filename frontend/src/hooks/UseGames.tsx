@@ -19,7 +19,8 @@ export const useGames = (gameQuery: GameQuery) =>
       params: {
         genre: gameQuery.genre?.name,
         platform: gameQuery.platform?.name,
+        sortBy: gameQuery.sortBy,
       },
     },
-    [gameQuery.genre?.name, gameQuery.platform?.name]
+    [gameQuery]
   );

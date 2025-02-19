@@ -3,21 +3,26 @@ import Game from "../models/game.js";
 const getAllgames = async (req, res) => {
   const selectedGenre = req.query.genre;
   const selectedPlatform = req.query.platform;
+  let sorting = req.query.sortBy;
 
-  let games;
+  let sortOption = {};
 
-  if (selectedGenre && selectedPlatform) {
-    games = await Game.find({
-      platforms: { $in: [selectedPlatform] },
-      genres: { $in: [selectedGenre] },
-    });
-  } else if (selectedGenre) {
-    games = await Game.find({ genres: { $in: [selectedGenre] } });
-  } else if (selectedPlatform) {
-    games = await Game.find({ platforms: { $in: [selectedPlatform] } });
-  } else {
-    games = await Game.find();
+  if (sorting) {
+    const isDescending = sorting.startsWith("-");
+    const sortField = isDescending ? sorting.substring(1) : sorting;
+
+    const allowedFields = ["name", "released", "added", "rating", "criticScore"];
+
+    if (allowedFields.includes(sortField)) {
+      sortOption[sortField] = isDescending ? -1 : 1;
+    }
   }
+
+  let query = {};
+  if (selectedGenre) query.genres = { $in: [selectedGenre] };
+  if (selectedPlatform) query.platforms = { $in: [selectedPlatform] };
+
+  const games = await Game.find(query).sort(sortOption);
 
   res.send({
     results: games,
