@@ -7,6 +7,8 @@ import {
   ListItem,
   Spinner,
   Link,
+  Heading,
+  Box,
 } from "@chakra-ui/react";
 import { useColorModeValue } from "./ui/color-mode";
 
@@ -15,8 +17,7 @@ interface Props {
   selectedGenre: Genre | null;
 }
 
-const GenreList = ({selectedGenre, onSelectGenre }: Props) => {
-
+const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
   const hoverColor = useColorModeValue("yellow.500", "yellow.300");
   const selectedColor = useColorModeValue("yellow.600", "yellow.400");
   const textColor = useColorModeValue("black", "white");
@@ -31,24 +32,32 @@ const GenreList = ({selectedGenre, onSelectGenre }: Props) => {
     );
   if (error) return null;
   return (
-    <List.Root gap={4} marginTop={11} listStyleType="none">
-      {data.map((genre) => (
-        <ListItem key={genre._id}>
-          <HStack gap={4}>
-            <Image src={genre.image_background} boxSize={9} borderRadius={4} />
-            <Link
-              onClick={() => onSelectGenre(genre)}
-              fontSize={"lg"}
-              fontWeight={selectedGenre === genre ? "bold" : "normal"}
-              color={selectedGenre === genre ? selectedColor : textColor}
-              _hover={{ color: hoverColor, cursor: "pointer" }}
-            >
-              {genre.name}
-            </Link>
-          </HStack>
-        </ListItem>
-      ))}
-    </List.Root>
+    <Box marginTop={11}>
+      <Heading marginBottom={4} fontSize={'2xl'}>Genres</Heading>
+      <List.Root gap={4} listStyleType="none">
+        {data.map((genre) => (
+          <ListItem key={genre._id}>
+            <HStack gap={4}>
+              <Image
+                src={genre.image_background}
+                boxSize={9}
+                borderRadius={4}
+                objectFit={"cover"}
+              />
+              <Link
+                onClick={() => onSelectGenre(genre)}
+                fontSize={"lg"}
+                fontWeight={selectedGenre === genre ? "bold" : "normal"}
+                color={selectedGenre === genre ? selectedColor : textColor}
+                _hover={{ color: hoverColor, cursor: "pointer" }}
+              >
+                {genre.name}
+              </Link>
+            </HStack>
+          </ListItem>
+        ))}
+      </List.Root>
+    </Box>
   );
 };
 
