@@ -3,6 +3,8 @@ import Game from "../models/game.js";
 const getAllgames = async (req, res) => {
   const selectedGenre = req.query.genre;
   const selectedPlatform = req.query.platform;
+  const word = req.query.search;
+  
   let sorting = req.query.sortBy;
 
   let sortOption = {};
@@ -21,6 +23,7 @@ const getAllgames = async (req, res) => {
   let query = {};
   if (selectedGenre) query.genres = { $in: [selectedGenre] };
   if (selectedPlatform) query.platforms = { $in: [selectedPlatform] };
+  if (word) query.name = { $regex: word, $options: "i" };
 
   const games = await Game.find(query).sort(sortOption);
 

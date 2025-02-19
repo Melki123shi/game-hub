@@ -20,6 +20,7 @@ export const useGames = (gameQuery: GameQuery) =>
         genre: gameQuery.genre?.name,
         platform: gameQuery.platform?.name,
         sortBy: gameQuery.sortBy,
+        search: gameQuery.searchText,
       },
     },
     [gameQuery]
