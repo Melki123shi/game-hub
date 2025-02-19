@@ -13,6 +13,7 @@ import { Genre } from "./hooks/UseGenres";
 import PlatformSelector from "./components/PlatformSelector";
 import { Platform } from "./hooks/UsePlatforms";
 import SortSelector from "./components/SortSelector";
+import GameHeading from "./components/GameHeading";
 
 export interface GameQuery {
   genre: Genre | null;
@@ -48,6 +49,7 @@ function App() {
         area="main"
         marginX={{ base: 4, sm: 24, md: 12, lg: 23, xl: 24 }}
       >
+          <GameHeading gameQuery={gameQuery}/>
         <HStack gap={4} marginBottom={4}>
           <PlatformSelector
             selectedPlatform={gameQuery.platform}
