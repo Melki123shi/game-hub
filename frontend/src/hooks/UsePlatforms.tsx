@@ -1,7 +1,7 @@
 import { platforms } from "../data/platform.ts";
 
 export interface Platform {
-  _id: number;
+  _id: string;
   name: string;
 }
 
