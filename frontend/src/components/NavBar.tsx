@@ -1,6 +1,7 @@
 import { HStack, Image } from "@chakra-ui/react";
 import logo from "../assets/images/logo.jpeg";
 import ColorModeButton from "./ColorModeButton";
+import SearchBar from "./SearchBar";
 
 const NavBar = () => {
   return (
@@ -14,6 +15,7 @@ const NavBar = () => {
         borderRadius={123}
         backgroundColor={"yellow.100"}
       />
+      <SearchBar />
       <ColorModeButton />
     </HStack>
   );
