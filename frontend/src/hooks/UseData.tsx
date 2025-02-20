@@ -1,46 +1,27 @@
-import { useEffect, useState } from "react";
-import axiosClient from "../services/api-client";
-import { AxiosRequestConfig } from "axios";
+import { useQuery } from "@tanstack/react-query";
+import{ AxiosRequestConfig } from "axios";
+import apiClient from '../services/api-client';
 
-export interface GridResponse<T> {
+interface GridResponse<T> {
   count: number;
   results: T[];
 }
+
 export const UseData = <T,>(
   endpoint: string,
   requestConfig?: AxiosRequestConfig,
-  dependencies?: unknown[]
+  dependencies: unknown[] = []
 ) => {
-  const [data, setData] = useState<T[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setisLoading] = useState(false);
+  const fetchingData = async (): Promise<T[]> => {
+    const response = await apiClient.get<GridResponse<T>>(endpoint, {
+      ...requestConfig,
+    });
+    return response.data.results || [];
+  };
 
-  useEffect(
-    () => {
-      const controller = new AbortController();
-      setisLoading(true);
-      axiosClient
-        .get<GridResponse<T>>(endpoint, {
-          signal: controller.signal,
-          ...requestConfig,
-        })
-        .then(
-          (response) => {
-            setData(response.data.results);
-            setisLoading(false);
-          },
-          (error) => {
-            if (error instanceof AbortController) return;
-            setError(error.message);
-            setisLoading(false);
-          }
-        );
-
-      return;
-      // () => controller.abort();
-    },
-    dependencies ? [...dependencies] : []
-  );
-
-  return { data, error, isLoading };
+  return useQuery<T[], Error>({
+    queryKey: [endpoint, ...dependencies],
+    queryFn: fetchingData,
+    refetchOnWindowFocus: false,
+  });
 };
