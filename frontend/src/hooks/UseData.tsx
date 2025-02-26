@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import{ AxiosRequestConfig } from "axios";
 import apiClient from '../services/api-client';
 
-interface GridResponse<T> {
+export interface GridResponse<T> {
   count: number;
   results: T[];
 }
@@ -12,16 +12,15 @@ export const UseData = <T,>(
   requestConfig?: AxiosRequestConfig,
   dependencies: unknown[] = []
 ) => {
-  const fetchingData = async (): Promise<T[]> => {
-    const response = await apiClient.get<GridResponse<T>>(endpoint, {
+  const fetchingData = (): Promise<T[]> => 
+    apiClient.get<GridResponse<T>>(endpoint, {
       ...requestConfig,
-    });
-    return response.data.results || [];
-  };
+    }).then((response) => response.data.results || []);
 
   return useQuery<T[], Error>({
     queryKey: [endpoint, ...dependencies],
     queryFn: fetchingData,
     refetchOnWindowFocus: false,
+    staleTime: 10 * 1000,
   });
 };

@@ -22,7 +22,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
   const selectedColor = useColorModeValue("yellow.600", "yellow.400");
   const textColor = useColorModeValue("black", "white");
 
-  const { data, isLoading, error } = UseGenres();
+  const { data: genres, isLoading, error } = UseGenres();
 
   if (isLoading)
     return (
@@ -35,7 +35,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
     <Box marginTop={11}>
       <Heading marginBottom={4} fontSize={'2xl'}>Genres</Heading>
       <List.Root gap={4} listStyleType="none">
-        {data.map((genre) => (
+        {genres?.map((genre) => (
           <ListItem key={genre._id}>
             <HStack gap={4}>
               <Image
