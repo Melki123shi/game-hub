@@ -38,7 +38,7 @@ function App() {
           "aside main"
         `,
       }}
-      templateColumns={{ base: "1fr", lg: "244px 3fr" }}
+      templateColumns={{ base: "1fr", lg: "211px 3fr" }}
     >
       <GridItem area="header">
         <NavBar
@@ -47,7 +47,7 @@ function App() {
       </GridItem>
       <GridItem
         area="main"
-        marginX={{ base: 4, sm: 24, md: 12, lg: 23, xl: 24 }}
+        marginX={{ base: 4, sm: 22, md: 12, lg: 23, xl: 21 }}
       >
           <GameHeading gameQuery={gameQuery}/>
         <HStack gap={4} marginBottom={4}>
