@@ -35,7 +35,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
     <Box marginTop={11}>
       <Heading marginBottom={4} fontSize={'2xl'}>Genres</Heading>
       <List.Root gap={4} listStyleType="none">
-        {genres?.map((genre) => (
+        {genres.map((genre) => (
           <ListItem key={genre._id}>
             <HStack gap={4}>
               <Image
