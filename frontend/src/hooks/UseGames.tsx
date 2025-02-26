@@ -1,7 +1,6 @@
 import { GameQuery } from "@/App";
-import { GridResponse } from "./UseData";
 import { useQuery } from "@tanstack/react-query";
-import apiClient from "@/services/api-client";
+import ApiClient from "@/services/api-client";
 
 export interface Game {
   _id: string;
@@ -14,20 +13,18 @@ export interface Game {
   criticScore: number;
 }
 
+const apiClient = new ApiClient<Game>("/games");
 export const useGames = (gameQuery: GameQuery) =>
   useQuery<Game[], Error>({
     queryKey: ["games", gameQuery],
     queryFn: () =>
-      apiClient.get<GridResponse<Game>>(
-        "/games",
-        {
-          params: {
-            genre: gameQuery.genre?.name,
-            platform: gameQuery.platform?.name,
-            sortBy: gameQuery.sortBy,
-            search: gameQuery.searchText,
-          },
-        }
-      ).then((res) => res.data.results || []),
+      apiClient.getAll({
+        params: {
+          genre: gameQuery.genre?.name,
+          platform: gameQuery.platform?.name,
+          sortBy: gameQuery.sortBy,
+          search: gameQuery.searchText,
+        },
+      }),
     staleTime: 10 * 1000,
   });
