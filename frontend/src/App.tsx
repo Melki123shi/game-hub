@@ -38,7 +38,7 @@ function App() {
           "aside main"
         `,
       }}
-      templateColumns={{ base: "1fr", lg: "211px 3fr" }}
+      templateColumns={{ base: "1fr", lg: "233px 3fr" }}
     >
       <GridItem area="header">
         <NavBar
