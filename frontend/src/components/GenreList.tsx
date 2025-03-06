@@ -1,4 +1,4 @@
-import { Genre, UseGenres } from "@/hooks/UseGenres";
+import { UseGenres } from "@/hooks/UseGenres";
 import {
   List,
   HStack,
@@ -11,16 +11,16 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { useColorModeValue } from "./ui/color-mode";
+import useGameQueryStore from "@/store/store";
 
-interface Props {
-  onSelectGenre: (genre: Genre) => void;
-  selectedGenre: Genre | null;
-}
 
-const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
+const GenreList = () => {
   const hoverColor = useColorModeValue("yellow.500", "yellow.300");
   const selectedColor = useColorModeValue("yellow.600", "yellow.400");
   const textColor = useColorModeValue("black", "white");
+
+  const selectedGenre = useGameQueryStore((state) => state.gameQuery.genre);
+  const onSelectGenre = useGameQueryStore((state) => state.setselectGenre);
 
   const { data: genres, isLoading, error } = UseGenres();
 

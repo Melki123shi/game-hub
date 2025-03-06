@@ -7,16 +7,20 @@ import {
 import { Button, HStack, Text } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 
-import { Platform, UsePlatforms } from "@/hooks/UsePlatforms";
+import { UsePlatforms } from "@/hooks/UsePlatforms";
+import useGameQueryStore from "@/store/store";
 
-interface Props {
-  selectedPlatform: Platform | null;
-  onSelectPlatform: (platform: Platform) => void;
-  unSelectPlatform: () => void;
-}
-
-const PlatformSelector = ({ selectedPlatform, onSelectPlatform, unSelectPlatform }: Props) => {
+const PlatformSelector = () => {
   const { data: platforms, error } = UsePlatforms();
+  const selectedPlatform = useGameQueryStore(
+    (state) => state.gameQuery.platform
+  );
+  const onSelectPlatform = useGameQueryStore(
+    (state) => state.setselectPlatform
+  );
+  const unSelectPlatform = useGameQueryStore(
+    (state) => state.setunselectPlatform
+  );
 
   if (error) return null;
 

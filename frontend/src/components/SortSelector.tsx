@@ -4,15 +4,12 @@ import {
   MenuRoot,
   MenuTrigger,
 } from "@/components/ui/menu";
+import useGameQueryStore from "@/store/store";
 import { Button, HStack, Text } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 
-interface Props {
-  onSelect: (value: string) => void;
-  sortBy: string | null;
-}
 
-const SortSelector = ({ onSelect, sortBy }: Props) => {
+const SortSelector = () => {
   const sortingOptions: { [key: string]: string } = {
     "": "Relevance",
     "-added": "Date Added",
@@ -21,6 +18,10 @@ const SortSelector = ({ onSelect, sortBy }: Props) => {
     "-criticScore": "Popularity",
     "-rating": "Average Rating",
   };
+
+  const setSortBy = useGameQueryStore((state) => state.setsortGame);
+  const sortBy = useGameQueryStore((state) => state.gameQuery.sortBy);
+  
   return (
     <MenuRoot>
       <MenuTrigger asChild>
@@ -44,7 +45,7 @@ const SortSelector = ({ onSelect, sortBy }: Props) => {
             value={key}
             cursor={"pointer"}
             key={key}
-            onClick={() => onSelect(key)}
+            onClick={() => setSortBy(key)}
           >
             {option}
           </MenuItem>
