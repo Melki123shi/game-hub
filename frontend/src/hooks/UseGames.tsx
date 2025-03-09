@@ -1,7 +1,7 @@
-import { GameQuery } from "@/App";
 import { useQuery } from "@tanstack/react-query";
 import ApiClient from "@/services/api-client";
 import ms from 'ms';
+import { GameQuery } from "@/store/store";
 
 export interface Game {
   _id: string;
