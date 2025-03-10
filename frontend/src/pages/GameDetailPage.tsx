@@ -1,5 +1,6 @@
-import { useGameDetail } from "@/hooks/useGameDetail";
-import { Heading, Spinner, Text, Flex } from "@chakra-ui/react";
+import ExpandableText from "@/components/ExpandableText";
+import { useGameDetail } from "@/hooks/useGame";
+import { Heading, Spinner, Flex } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 const GameDetailPage = () => {
@@ -20,7 +21,7 @@ const GameDetailPage = () => {
       <Heading fontWeight={"extrabold"} fontSize={"4xl"} paddingY={4}>
         {game.name}
       </Heading>
-      <Text>{game.description}</Text>
+      <ExpandableText>{game.description}</ExpandableText>
     </>
   );
 };
