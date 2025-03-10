@@ -19,6 +19,9 @@ class ApiClient<T> {
     axiosInstance
       .get<GridResponse<T>>(this.endpoint, config)
       .then((res) => res.data.results || []);
+
+  getGame = (slug: string) =>
+    axiosInstance.get<T>(`${this.endpoint}/${slug}`).then((res) => res.data);
 }
 
 export default ApiClient;

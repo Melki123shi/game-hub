@@ -7,11 +7,11 @@ import {
 import { Button, HStack, Text } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 
-import { UsePlatforms } from "@/hooks/UsePlatforms";
+import { usePlatforms } from "@/hooks/usePlatforms";
 import useGameQueryStore from "@/store/store";
 
 const PlatformSelector = () => {
-  const { data: platforms, error } = UsePlatforms();
+  const { data: platforms, error } = usePlatforms();
   const selectedPlatform = useGameQueryStore(
     (state) => state.gameQuery.platform
   );
