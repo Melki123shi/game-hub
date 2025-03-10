@@ -6,6 +6,8 @@ import { GameQuery } from "@/store/store";
 export interface Game {
   _id: string;
   name: string;
+  slug: string;
+  description: string;
   released: string;
   background_image: string;
   rating: number;

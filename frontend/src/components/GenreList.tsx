@@ -1,4 +1,4 @@
-import { UseGenres } from "@/hooks/UseGenres";
+import { useGenres } from "@/hooks/useGenres";
 import {
   List,
   HStack,
@@ -22,7 +22,7 @@ const GenreList = () => {
   const selectedGenre = useGameQueryStore((state) => state.gameQuery.genre);
   const onSelectGenre = useGameQueryStore((state) => state.setselectGenre);
 
-  const { data: genres, isLoading, error } = UseGenres();
+  const { data: genres, isLoading, error } = useGenres();
 
   if (isLoading)
     return (

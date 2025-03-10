@@ -10,7 +10,7 @@ export interface Platform {
 
 const apiClient = new ApiClient<Platform>("/platforms");
 
-export const UsePlatforms = () =>
+export const usePlatforms = () =>
   useQuery<Platform[], Error>({
     queryKey: ["platforms"],
     queryFn: apiClient.getAll,

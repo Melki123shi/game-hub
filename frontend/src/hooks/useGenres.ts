@@ -12,7 +12,7 @@ export interface Genre {
 
 const apiClient = new ApiClient<Genre>("/genres");
 
-export const UseGenres = () =>
+export const useGenres = () =>
   useQuery<Genre[], Error>({
     queryKey: ["genres"],
     queryFn: apiClient.getAll,
