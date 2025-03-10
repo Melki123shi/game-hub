@@ -4,7 +4,7 @@ const getAllgames = async (req, res) => {
   const selectedGenre = req.query.genre;
   const selectedPlatform = req.query.platform;
   const word = req.query.search;
-  
+
   let sorting = req.query.sortBy;
 
   let sortOption = {};
@@ -13,7 +13,13 @@ const getAllgames = async (req, res) => {
     const isDescending = sorting.startsWith("-");
     const sortField = isDescending ? sorting.substring(1) : sorting;
 
-    const allowedFields = ["name", "released", "added", "rating", "criticScore"];
+    const allowedFields = [
+      "name",
+      "released",
+      "added",
+      "rating",
+      "criticScore",
+    ];
 
     if (allowedFields.includes(sortField)) {
       sortOption[sortField] = isDescending ? -1 : 1;
@@ -33,4 +39,9 @@ const getAllgames = async (req, res) => {
   });
 };
 
-export default getAllgames;
+const getGameDetail = async (req, res) => {
+  const game = await Game.findOne({ slug: req.params.id });
+  res.send(game);
+};
+
+export { getAllgames, getGameDetail };

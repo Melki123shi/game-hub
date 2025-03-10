@@ -37,6 +37,10 @@ const gameschema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  decreption: {
+    type: String,
+    required: true,
+  }
 });
 
 const Game = mongoose.model("Game", gameschema);
