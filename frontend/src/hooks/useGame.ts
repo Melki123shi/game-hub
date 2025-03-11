@@ -8,7 +8,7 @@ export const useGameDetail = (slug: string) => {
 
   return useQuery<Game, Error>({
     queryKey: ["game", slug],
-    queryFn: () => apiClient.getGame(slug),
+    queryFn: () => apiClient.get(slug),
     staleTime: ms("1hr"),
   });
 };
