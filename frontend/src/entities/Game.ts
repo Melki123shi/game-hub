@@ -1,5 +1,5 @@
 
-export interface Game {
+export default interface Game {
   _id: string;
   name: string;
   slug: string;
