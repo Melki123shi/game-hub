@@ -24,6 +24,7 @@ const GameDetailPage = () => {
       </Heading>
       <ExpandableText>{game.description}</ExpandableText>
       <GameAttribute game={game} />
+      {/* <video src="https://www.youtube.com/watch?v=rrqfPG4ZcAA"></video> */}
     </>
   );
 };
